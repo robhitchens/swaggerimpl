@@ -1,6 +1,8 @@
 package hello;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +20,9 @@ public class GreetingsController {
             notes = "Accepts name as query parameter for generating a greeting, defaults to world",
             response = Greeting.class
     )
-    @RequestMapping(value = "/greeting", method = RequestMethod.GET)
+    //@ApiResponses({@ApiResponse(code = 200, message="")})
+    //TODO: setup spring boot development tools.
+    @RequestMapping(value = "/greeting", method = RequestMethod.GET, produces = {"application/json"})
     public Greeting greeting(@RequestParam(value="name", defaultValue = "World")String name){
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
