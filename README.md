@@ -1,4 +1,4 @@
-#Swagger Implementation example (and spring-boot dev-tools):
+# Swagger Implementation example (and spring-boot dev-tools):
 - [annotation resource](https://github.com/swagger-api/swagger-core/wiki/Annotations-1.5.X)
 - added dev-tools to make spring-boot application development faster, [link](https://dev.to/suin/spring-boot-developer-tools-how-to-enable-automatic-restart-in-intellij-idea-1c6i) to some additional intellij setup. 
 ### Steps to setup spring-boot dev-tools:
