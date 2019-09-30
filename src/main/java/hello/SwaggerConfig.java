@@ -24,39 +24,39 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
     //NOTE Swagger UI is accessible at localhost:8080/swagger-ui.html
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-        .select()
-        //can also restrict documentation using RequestHandlerSelectors.basePackage("com.wsfsbank.package").
-        .apis(RequestHandlerSelectors.any())
-        .paths(PathSelectors.any())
-        .build()
-        .apiInfo(apiInfo())
-        .useDefaultResponseMessages(false)
-        .globalResponseMessage(RequestMethod.GET, List.of(
-                new ResponseMessageBuilder()
-                .code(500)
-                .message("500 message")
-                .responseModel(new ModelRef("Error"))
-                .build(),
-
-                new ResponseMessageBuilder()
-                .code( 403)
-                .message("Forbidden")
+                .select()
+                //can also restrict documentation using RequestHandlerSelectors.basePackage("com.wsfsbank.package").
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
                 .build()
-        ))
-        ;
+                .apiInfo(apiInfo())
+                .useDefaultResponseMessages(false)
+                .globalResponseMessage(RequestMethod.GET, List.of(
+                        new ResponseMessageBuilder()
+                                .code(500)
+                                .message("500 message")
+                                //.responseModel(new ModelRef("Error"))//NOTE: response model doesn't seem to work here.
+                                .build(),
+
+                        new ResponseMessageBuilder()
+                                .code(403)
+                                .message("Forbidden")
+                                .build()
+                ))
+                ;
     }
 
-    private ApiInfo apiInfo(){
+    private ApiInfo apiInfo() {
         return new ApiInfo(
-            "My REST Api",
-            "Some custom description of API",
-            "API TOS",
-            "Terms of service",
-            new Contact("Robert Hitchens", "myfoot.ur.ass", "rhitchens@wsfsbank.com"),
-            "License of API",
-            "API License URL",
-            Collections.emptyList());//Vender extensions.
+                "My REST Api",
+                "Some custom description of API",
+                "API TOS",
+                "Terms of service",
+                new Contact("Robert Hitchens", "myfoot.ur.ass", "rhitchens@wsfsbank.com"),
+                "License of API",
+                "API License URL",
+                Collections.emptyList());//Vender extensions.
     }
 }
