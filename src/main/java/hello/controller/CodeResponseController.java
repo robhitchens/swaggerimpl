@@ -67,15 +67,15 @@ public class CodeResponseController {
     @RequestMapping(value = "/code", method = RequestMethod.GET, produces = {"application/json"})
     public ResponseEntity<SimpleResponseDTO> returnErrorCode(
             @ApiParam(value = "Http status code used to create returned ResponseEntity. Also, returned in body in json format", required = true)
-            @RequestParam(value = "return", defaultValue = "418")Integer errorCode,
+            @RequestParam(value = "return", defaultValue = "418")String errorCode,
             @ApiParam(value = "Message to be returned in body in json format.", required = true)
             @RequestParam(value = "message", defaultValue = "I'm a teapot")String message
     ){//TODO should add annotations for authorization at some point.
         SimpleResponseDTO simpleResponseDTO = new SimpleResponseDTO();
-        simpleResponseDTO.setCode(errorCode);
+        simpleResponseDTO.setCode(Integer.parseInt(errorCode));
         simpleResponseDTO.setMessage(message);
         return ResponseEntity
-                .status(errorCode)
+                .status(simpleResponseDTO.getCode())
                 .body(simpleResponseDTO)
                 ;
                 //.build();
