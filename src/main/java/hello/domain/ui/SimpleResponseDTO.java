@@ -1,4 +1,4 @@
-package hello;
+package hello.domain.ui;
 
 public class SimpleResponseDTO {
     private int code;

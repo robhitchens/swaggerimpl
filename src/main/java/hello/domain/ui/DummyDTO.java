@@ -1,4 +1,4 @@
-package hello;
+package hello.domain.ui;
 
 public class DummyDTO {
     private String propertyA;

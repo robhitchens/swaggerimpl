@@ -1,6 +1,6 @@
-package hello;
+package hello.controller;
 
-import io.swagger.annotations.Api;
+import hello.domain.ui.SimpleResponseDTO;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
