@@ -1,10 +1,7 @@
 package hello.controller;
 
 import hello.domain.ui.SimpleResponseDTO;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,7 +53,7 @@ public class CodeResponseController {
             @ApiResponse(code = 415, message = "Unsupported Media Type"),
             @ApiResponse(code = 416, message = "Requested Range Not Satisfiable"),
             @ApiResponse(code = 417, message = "Expectation Failed"),
-            @ApiResponse(code = 418, message = "I'm a teapot"),
+            @ApiResponse(code = 418, message = "I'm a teapot", responseHeaders = @ResponseHeader(name = "X-Rack-Cache", description = "Explains whether or not a cache was used", response = Boolean.class)),
             @ApiResponse(code = 500, message = "Internal Server Error"),
             @ApiResponse(code = 501, message = "Not Implemented"),
             @ApiResponse(code = 502, message = "Bad Gateway"),
@@ -64,13 +61,16 @@ public class CodeResponseController {
             @ApiResponse(code = 504, message = "Gateway Timeout"),
             @ApiResponse(code = 505, message = "HTTP Version Not Supported")
     })
+    @ApiImplicitParams({//Example implicit param
+            @ApiImplicitParam(name = "name", value = "User's name", required = true, dataType = "string", paramType = "query")
+    })
     @RequestMapping(value = "/code", method = RequestMethod.GET, produces = {"application/json"})
     public ResponseEntity<SimpleResponseDTO> returnErrorCode(
-            @ApiParam(value = "Http status code used to create returned ResponseEntity", required = true)
+            @ApiParam(value = "Http status code used to create returned ResponseEntity. Also, returned in body in json format", required = true)
             @RequestParam(value = "return", defaultValue = "418")Integer errorCode,
             @ApiParam(value = "Message to be returned in body in json format.", required = true)
             @RequestParam(value = "message", defaultValue = "I'm a teapot")String message
-    ){
+    ){//TODO should add annotations for authorization at some point.
         SimpleResponseDTO simpleResponseDTO = new SimpleResponseDTO();
         simpleResponseDTO.setCode(errorCode);
         simpleResponseDTO.setMessage(message);
