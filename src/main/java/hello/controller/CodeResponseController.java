@@ -2,6 +2,7 @@ package hello.controller;
 
 import hello.domain.ui.SimpleResponseDTO;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
@@ -65,7 +66,9 @@ public class CodeResponseController {
     })
     @RequestMapping(value = "/code", method = RequestMethod.GET, produces = {"application/json"})
     public ResponseEntity<SimpleResponseDTO> returnErrorCode(
+            @ApiParam(value = "Http status code used to create returned ResponseEntity", required = true)
             @RequestParam(value = "return", defaultValue = "418")Integer errorCode,
+            @ApiParam(value = "Message to be returned in body in json format.", required = true)
             @RequestParam(value = "message", defaultValue = "I'm a teapot")String message
     ){
         SimpleResponseDTO simpleResponseDTO = new SimpleResponseDTO();
