@@ -16,7 +16,8 @@ public class CodeResponseController {
     @ApiOperation(
             value = "Returns ResponseEntity of provided code",
             notes = "Accepts a query parameter of type int and returns a ResponseEntity with the passed in code",
-            response = ResponseEntity.class
+            response = SimpleResponseDTO.class,
+            responseContainer = "ResponseEntity"
     )
     @ApiResponses({
             @ApiResponse(code = 100, message = "Continue"),
@@ -63,7 +64,17 @@ public class CodeResponseController {
             @ApiResponse(code = 505, message = "HTTP Version Not Supported")
     })
     @RequestMapping(value = "/code", method = RequestMethod.GET, produces = {"application/json"})
-    public ResponseEntity returnErrorCode(@RequestParam(value = "return", defaultValue = "418")Integer errorCode){
-        return ResponseEntity.status(errorCode).build();
+    public ResponseEntity<SimpleResponseDTO> returnErrorCode(
+            @RequestParam(value = "return", defaultValue = "418")Integer errorCode,
+            @RequestParam(value = "message", defaultValue = "I'm a teapot")String message
+    ){
+        SimpleResponseDTO simpleResponseDTO = new SimpleResponseDTO();
+        simpleResponseDTO.setCode(errorCode);
+        simpleResponseDTO.setMessage(message);
+        return ResponseEntity
+                .status(errorCode)
+                .body(simpleResponseDTO)
+                ;
+                //.build();
     }
 }
