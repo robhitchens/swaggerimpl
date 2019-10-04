@@ -126,6 +126,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         registrationBean.setOrder(-100);
         return registrationBean;
     }
+
+
     /*@Bean
     @Override
     protected UserDetailsService userDetailsService() {
