@@ -17,8 +17,8 @@ public class WebSecurityConfigDev extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/", "/home").permitAll()
                     .anyRequest().authenticated()
-                    .and()//above allows access without authentication for the above paths.
-                /*.formLogin()
+                    /*.and()
+                .formLogin()
                     .loginPage("/login")
                     .permitAll()
                     .and()
